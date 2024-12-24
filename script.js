@@ -1,20 +1,16 @@
+// storing tasks in the browser
+const savedTodos = localStorage.getItem("todoList");
+const todoList = savedTodos
+  ? JSON.parse(savedTodos)
+  : [{ name: "make dinner", dueDate: "2024-12-25" }];
+
 const btnAdd = document.querySelector(".js-button-add");
 
 btnAdd?.addEventListener("click", () => {
   addTodo();
 });
 
-const saveTodos = () =>
-  localStorage.setItem("todoList", JSON.stringify(todoList));
-
-const loadTodos = () => {
-  const savedTodos = localStorage.getItem("todoList") || [
-    { name: "make dinner", dueDate: "2024-12-25" },
-  ];
-};
-
-const todoList = [{ name: "make dinner", dueDate: "2024-12-25" }];
-
+// Logic to view and delete tasks
 function renderTodoList() {
   let todoHTML = "";
   for (let i = 0; i < todoList.length; i++) {
@@ -34,6 +30,7 @@ function renderTodoList() {
   displayTodo.innerHTML = todoHTML;
 }
 
+// Logic to add tasks
 function addTodo() {
   const inputNameElement = document.querySelector(".js-input-name");
   const dueDateInputElement = document.querySelector(".js-date-input");
@@ -43,9 +40,10 @@ function addTodo() {
 
   if (name && dueDate !== undefined) {
     todoList.push({ name, dueDate });
-    saveTodos();
+    localStorage.setItem("todoList", JSON.stringify(todoList));
     renderTodoList();
 
+    // resetting the value of the inputs once a first value has been added
     if (inputNameElement) {
       inputNameElement.value = "";
     }
@@ -55,5 +53,4 @@ function addTodo() {
     }
   }
 }
-loadTodos();
 renderTodoList();
