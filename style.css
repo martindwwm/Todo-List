@@ -1,0 +1,66 @@
+:root {
+  --bg-btn-add: green;
+  --text-color: #fff;
+  --bg-btn-delete: darkred;
+  --font-size: 1.5rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: Arial;
+  font-size: var(--font-size);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.Todo-list {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-input-grid,
+.todo-grid {
+  display: grid;
+  grid-template-columns: 200px 150px 100px;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.todo-input-grid {
+  margin: 15px 0 10px 0;
+  display: grid;
+  align-items: stretch;
+}
+
+.input-name,
+.input-due-date {
+  padding: 6px;
+  font-size: var(--font-size);
+}
+
+.button-add {
+  background-color: var(--bg-btn-add);
+  color: var(--text-color);
+  font-size: var(--font-size);
+  border: none;
+  cursor: pointer;
+}
+
+.button-delete {
+  padding: 10px 0 10px 0;
+  background-color: var(--bg-btn-delete);
+  color: var(--text-color);
+  font-size: var(--font-size);
+  border: none;
+  cursor: pointer;
+}
