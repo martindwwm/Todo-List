@@ -1,28 +1,19 @@
-const btnAdd = document.querySelector(".js-add-button");
+const btnAdd = document.querySelector(".js-button-add");
 
 btnAdd?.addEventListener("click", () => {
   addTodo();
 });
 
-function saveTodos() {
-  localStorage.setItem("TodoList", JSON.stringify(todoList));
-}
+const saveTodos = () =>
+  localStorage.setItem("todoList", JSON.stringify(todoList));
 
-function loadTodos() {
+const loadTodos = () => {
   const savedTodos = localStorage.getItem("todoList") || [
-    {
-      name: "make dinner",
-      dueDate: "2024-12-25",
-    },
+    { name: "make dinner", dueDate: "2024-12-25" },
   ];
-}
+};
 
-const todoList = [
-  {
-    name: "make dinner",
-    dueDate: "2024-12-25",
-  },
-];
+const todoList = [{ name: "make dinner", dueDate: "2024-12-25" }];
 
 function renderTodoList() {
   let todoHTML = "";
@@ -33,26 +24,22 @@ function renderTodoList() {
     <div>${name}</div>
     <div>${dueDate}</div>
     <button onclick="
-    todoList.splice(${i}, 1);
-    renderTodoList();
+    todoList.splice(${i}, 1)
+    renderTodoList()
     " class="button-delete">Delete</button>
     `;
     todoHTML += html;
   }
-
   const displayTodo = document.querySelector(".js-render-todo-list");
-  if (displayTodo) {
-    displayTodo.innerHTML = todoHTML;
-  }
+  displayTodo.innerHTML = todoHTML;
 }
 
 function addTodo() {
-  const inputNameElement = document.querySelector(".js-name-input");
-  const dueDateinputElement = document.querySelector(".js-input-date");
-  //@ts-ignore
+  const inputNameElement = document.querySelector(".js-input-name");
+  const dueDateInputElement = document.querySelector(".js-date-input");
+
   const name = inputNameElement?.value;
-  //@ts-ignore
-  const dueDate = dueDateinputElement?.value;
+  const dueDate = dueDateInputElement?.value;
 
   if (name && dueDate !== undefined) {
     todoList.push({ name, dueDate });
@@ -60,16 +47,13 @@ function addTodo() {
     renderTodoList();
 
     if (inputNameElement) {
-      //@ts-ignore
       inputNameElement.value = "";
     }
 
-    if (dueDateinputElement) {
-      //@ts-ignore
-      dueDateinputElement.value = "";
+    if (dueDateInputElement) {
+      dueDateInputElement.value = "";
     }
   }
 }
-
 loadTodos();
 renderTodoList();
