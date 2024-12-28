@@ -18,17 +18,22 @@ function renderTodoList() {
     const html = `
     <div>${name}</div>
     <div>${dueDate}</div>
-    <button onclick="
-    todoList.splice(${index}, 1)
-    renderTodoList()
-    " class="button-delete">Delete</button>
+    <button class="js-delete-todo-button button-delete">Delete</button>
     `;
     todoHTML += html;
   });
   const displayTodo = document.querySelector(".js-render-todo-list");
 
-  //@ts-ignore
   displayTodo.innerHTML = todoHTML;
+
+  document
+    .querySelectorAll(".js-delete-todo-button")
+    .forEach((deleteButton, index) => {
+      deleteButton.addEventListener("click", () => {
+        todoList.splice(index, 1);
+        renderTodoList();
+      });
+    });
 }
 
 // Logic to add tasks
@@ -36,10 +41,7 @@ function addTodo() {
   const inputNameElement = document.querySelector(".js-input-name");
   const dueDateInputElement = document.querySelector(".js-date-input");
 
-  //@ts-ignore
   const name = inputNameElement?.value;
-
-  //@ts-ignore
   const dueDate = dueDateInputElement?.value;
 
   if (name && dueDate !== undefined) {
@@ -48,15 +50,8 @@ function addTodo() {
     renderTodoList();
 
     // resetting the value of the inputs once a first value has been added
-    if (inputNameElement) {
-      //@ts-ignore
-      inputNameElement.value = "";
-    }
-
-    if (dueDateInputElement) {
-      //@ts-ignore
-      dueDateInputElement.value = "";
-    }
+    inputNameElement.value = "";
+    dueDateInputElement.value = "";
   }
 }
 renderTodoList();
